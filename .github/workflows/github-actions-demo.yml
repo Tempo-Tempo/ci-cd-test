@@ -5,25 +5,27 @@ jobs:
   init:
     runs-on: ubuntu-latest
     strategy: 
-    matrix: node-version: [ 17.x  ]
+    matrix: 
+      node-version: [ 17.x  ]
     steps:
      - uses: actions/checkout@v3
      - name: Starting Node.js ${{ matrix.node-version }}
        uses: actions/setup-node@v3
-       with: node-version: ${{ matrix.node-version }}
+       with: 
+        node-version: ${{ matrix.node-version }}
      - name: install modules
        run: npm install
      - name: build project
        run: npm run build
-     - name: 
-       run: npm run 
-       - name: 
-       run: npm run 
-       - name: 
-       run: npm run 
-       - name: 
-       run: npm run 
-       - name: 
-       run: npm run 
-       - name: 
-       run: npm run 
+     - name: build storybook
+       run: npm run build:storybook
+     - name: unit tests
+       run: npm run test:unit
+     - name: e2e tests
+       run: npm run test:e2e
+     - name: run eslint
+       run: npm run lint
+     - name: type checking
+       run: npm run type:check
+     - name: i18next plugin test
+       run: npm run i18n:check
